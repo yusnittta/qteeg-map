@@ -1,0 +1,10 @@
+[user]
+    name = Yusnita Putri
+    email = yusnitaputri898@company.com
+    password = @Suksesyp898
+[push]
+    default = simple
+[credential]
+    helper = cache --timeout=360000000
+[core]
+    autocrlf = false
