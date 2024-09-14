@@ -1,5 +1,7 @@
 # QtEEG
 
+# QtEEG
+
 Simple Qt application to visualise MuseS output.
 
 ![QtEEG](assets/QtEEG.png) ![Spike detection](assets/detection.png)
