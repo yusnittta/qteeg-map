@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtEEG</string>
+   <string>QtEEG-Map</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -58,21 +58,21 @@
           <item>
            <widget class="QRadioButton" name="radioTime">
             <property name="text">
-             <string>Voltage</string>
+             <string>Tegangan</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QRadioButton" name="radioFrequencyMultiple">
             <property name="text">
-             <string>Frequency (multiple)</string>
+             <string>Frekuensi Ganda</string>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QRadioButton" name="radioFrequencySingle">
             <property name="text">
-             <string>Frequency (single)</string>
+             <string>Frekuensi Tunggal</string>
             </property>
            </widget>
           </item>
@@ -82,7 +82,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_2">
          <property name="title">
-          <string>Electrodes</string>
+          <string>Elektroda</string>
          </property>
          <property name="flat">
           <bool>true</bool>
@@ -125,7 +125,7 @@
        <item>
         <widget class="QGroupBox" name="groupBox_3">
          <property name="title">
-          <string>Frequency band</string>
+          <string>Pita Frekuensi</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -204,11 +204,11 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>&amp;File</string>
+     <string>&amp;Dokumen</string>
     </property>
     <widget class="QMenu" name="menuConnect_do_device">
      <property name="title">
-      <string>&amp;Device</string>
+      <string>&amp;Perangkat</string>
      </property>
      <addaction name="actionStream"/>
      <addaction name="actionDisconnect"/>
@@ -226,7 +226,7 @@
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>Bantuan</string>
     </property>
     <addaction name="actionAbout"/>
     <addaction name="separator"/>
@@ -234,7 +234,7 @@
    </widget>
    <widget class="QMenu" name="menuSpikes">
     <property name="title">
-     <string>Spikes</string>
+     <string>Plot</string>
     </property>
     <addaction name="actionSpike_sorting"/>
     <addaction name="actionSpike_detecting"/>
@@ -243,7 +243,7 @@
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Tools</string>
+     <string>Alat</string>
     </property>
     <addaction name="actionStimuli"/>
    </widget>
@@ -297,12 +297,12 @@
     </iconset>
    </property>
    <property name="text">
-    <string>&amp;Open csv file</string>
+    <string>&amp;Buka Dokumen</string>
    </property>
   </action>
   <action name="actionClose">
    <property name="text">
-    <string>&amp;Quit</string>
+    <string>&amp;Keluar</string>
    </property>
   </action>
   <action name="actionRun">
@@ -312,12 +312,12 @@
   </action>
   <action name="actionAbout">
    <property name="text">
-    <string>About</string>
+    <string>Tentang</string>
    </property>
   </action>
   <action name="actionHelp">
    <property name="text">
-    <string>Help</string>
+    <string>Bantuan</string>
    </property>
   </action>
   <action name="actionStream">
@@ -330,7 +330,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Connect and St&amp;ream</string>
+    <string>Hubungkan dan Si&amp;arkan</string>
    </property>
   </action>
   <action name="actionDisconnect">
@@ -343,7 +343,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>&amp;Disconnect</string>
+    <string>&amp;Putuskan</string>
    </property>
   </action>
   <action name="actionRecord">
@@ -356,7 +356,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Record</string>
+    <string>Rekam</string>
    </property>
   </action>
   <action name="actionStop">
@@ -369,7 +369,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Stop</string>
+    <string>Berhenti</string>
    </property>
   </action>
   <action name="actionView">
@@ -382,7 +382,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>View</string>
+    <string>Lihat</string>
    </property>
   </action>
   <action name="actionSettings">
@@ -390,7 +390,7 @@
     <bool>true</bool>
    </property>
    <property name="text">
-    <string>Settings</string>
+    <string>Pengaturan</string>
    </property>
   </action>
   <action name="actionStimuli">
@@ -416,7 +416,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Spike sorting</string>
+    <string>Pengurutan Lonjakan Sinyal</string>
    </property>
   </action>
   <action name="actionSpike_detecting">
@@ -429,7 +429,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Spike detecting</string>
+    <string>Deteksi Lonjakan Sinyal</string>
    </property>
   </action>
   <action name="actionFeature_extraction">
@@ -442,7 +442,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Feature extraction</string>
+    <string>Ekstraksi Fitur</string>
    </property>
   </action>
   <action name="actionClustering">
@@ -455,7 +455,7 @@
     </iconset>
    </property>
    <property name="text">
-    <string>Clustering</string>
+    <string>Pengelompokan</string>
    </property>
   </action>
  </widget>

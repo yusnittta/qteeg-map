@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Help</string>
+   <string>Bantuan</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -28,7 +28,7 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG &lt;/span&gt;&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG-Map &lt;/span&gt;<!--&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;--> &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -38,7 +38,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus pharetra lectus et nulla scelerisque, sed facilisis enim efficitur. Proin luctus venenatis luctus. Nullam ac ultrices enim, nec posuere nisi. Quisque dignissim ultrices leo, eu imperdiet orci porta a. Cras bibendum finibus sapien, vitae tempus arcu maximus eu. Proin rutrum nibh mauris. Donec mi augue, eleifend eu purus id, rutrum vulputate dolor. Duis eu ipsum ac velit mollis malesuada. Proin euismod luctus tristique. Suspendisse rutrum tristique ligula ac consequat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Praesent congue elit vel purus bibendum, nec convallis leo imperdiet. &lt;br&gt;&lt;br&gt; Pellentesque eu odio id dui consectetur finibus at a eros. Duis fringilla sit amet risus et congue. Integer vehicula, dolor vitae pretium cursus, neque risus aliquam mauris, sit amet varius leo lorem a ante. Suspendisse potenti. Nunc erat nulla, malesuada viverra congue vitae, malesuada eget orci. Phasellus facilisis ante in purus interdum, sit amet pulvinar eros maximus. Integer sed augue fermentum, maximus ex sagittis, lobortis urna. Morbi volutpat sem dui, sed imperdiet enim aliquam sit amet. Proin facilisis erat mauris, ac consectetur sapien congue et. Morbi nec turpis lacus. Praesent nisi diam, hendrerit in erat et, euismod ultrices justo. Sed ut arcu congue, pellentesque tortor eu, lacinia dolor. Suspendisse potenti. Vestibulum at commodo odio. </string>
+      <string>Selamat datang di aplikasi QtEEG-Map. Aplikasi ini dirancang untuk memungkinkan Anda merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT dari perangkat pemantauan otak secara real-time. Kami menyediakan berbagai fitur untuk membantu Anda dalam menganalisis data EEG. Anda dapat melakukan pra-pemrosesan data menggunakan band-pass filtering dan dekomposisi dengan Fast Fourier Transform. Aplikasi ini juga memungkinkan pemisahan sub-band frekuensi seperti Gamma, Alpha, Beta, Theta, dan Delta, serta pengelompokan data menggunakan Algoritma K-Means. Fitur plotting memungkinkan Anda untuk melihat data gulir satu dimensi pada kanal elektroda TP9, TP10, AF7, dan AF8, serta visualisasi dalam tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda. Selain itu, Anda dapat merekam dan menampilkan pembacaan perangkat secara real-time, melakukan deteksi, pengurutan, ekstraksi fitur, dan pengelompokan lonjakan sinyal. Aplikasi ini juga dilengkapi dengan stimuli generator dan transformasi menggunakan Fast Independent Component Analysis. Jika Anda memerlukan bantuan lebih lanjut atau mengalami masalah, jangan ragu untuk menghubungi tim kami. Kami berharap Anda mendapatkan pengalaman yang bermanfaat dengan aplikasi ini! </string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>
@@ -64,7 +64,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>version 0.1.0</string>
+      <string>versi 0.1.0</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignHCenter|Qt::AlignTop</set>

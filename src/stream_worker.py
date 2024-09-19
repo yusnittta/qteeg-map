@@ -1,17 +1,17 @@
 from functools import partial
 from time import time, sleep
 from PyQt5.QtCore import QObject, pyqtSignal
-import pygatt
-from muselsl.constants import (AUTO_DISCONNECT_DELAY, MUSE_NB_EEG_CHANNELS,
+import pygatt  # type: ignore
+from muselsl.constants import (AUTO_DISCONNECT_DELAY, MUSE_NB_EEG_CHANNELS, # type: ignore
                                MUSE_SAMPLING_EEG_RATE, LSL_EEG_CHUNK,
                                MUSE_NB_PPG_CHANNELS, MUSE_SAMPLING_PPG_RATE,
                                LSL_PPG_CHUNK, MUSE_NB_ACC_CHANNELS,
                                MUSE_SAMPLING_ACC_RATE, LSL_ACC_CHUNK,
                                MUSE_NB_GYRO_CHANNELS, MUSE_SAMPLING_GYRO_RATE,
                                LSL_GYRO_CHUNK)
-from muselsl.muse import Muse
-from muselsl.stream import find_muse
-from pylsl import StreamInfo, StreamOutlet
+from muselsl.muse import Muse # type: ignore
+from muselsl.stream import find_muse # type: ignore
+from pylsl import StreamInfo, StreamOutlet # type: ignore
 
 
 class StreamWorker(QObject):

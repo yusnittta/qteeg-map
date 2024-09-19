@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>About</string>
+   <string>Tentang</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -31,14 +31,14 @@
    <item row="3" column="0">
     <widget class="QLabel" name="label_3">
      <property name="text">
-      <string>Author: Bartłomiej Chybowski</string>
+      <string>Penulis: Yusnita Putri</string>
      </property>
     </widget>
    </item>
    <item row="1" column="0">
     <widget class="QLabel" name="label_2">
      <property name="text">
-      <string>version 0.1.0</string>
+      <string>versi 0.1.0</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignHCenter|Qt::AlignTop</set>
@@ -55,7 +55,7 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG &lt;/span&gt;&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG-Map <!--&lt;/span&gt;&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;--> &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -65,18 +65,21 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>QtEEG is a small application to visualise and analyse EEG recordings from InteraXon Muse&#8482; S brain sensing device.&lt;br&gt;&lt;br&gt;
-      Available functions: &lt;/br&gt;
+      <string>QtEEG-Map adalah perangkat lunak sederhana untuk memvisualisasikan dan menganalisis rekaman EEG dari perangkat pemantauan otak secara real-time.&lt;br&gt;&lt;br&gt;
+      Fitur yang tersedia: &lt;/br&gt;
       &lt;ul&gt;
-      &lt;li&gt;Visualise voltage recordings&lt;/li&gt;
-      &lt;li&gt;Visualise frequency recordings&lt;/li&gt;
-      &lt;li&gt;Record device readings&lt;/li&gt;
-      &lt;li&gt;Show device readings in real time&lt;/li&gt;
-      &lt;li&gt;Spike detection&lt;/li&gt;
-      &lt;li&gt;Spike sorting&lt;/li&gt;
-      &lt;li&gt;Feature extraction&lt;/li&gt;
-      &lt;li&gt;Clustering&lt;/li&gt;
+      &lt;li&gt;Pra-pemrosesan menggunakan band-pass filtering&lt;/li&gt;
+      &lt;li&gt;Dekomposisi menggunakan Fast Fourier Transform&lt;/li&gt;
+      &lt;li&gt;Pemisahan sub-band frekuensi, yaitu Gamma, Alpha, Beta, Theta, dan Delta&lt;/li&gt;
+      &lt;li&gt;Pengelompokan menggunakan Algoritma KMeans&lt;/li&gt;
+      &lt;li&gt;Ploting data gulir 1D pada kanal elektroda TP9, TP10, AF7, dan AF8&lt;/li&gt;
+      &lt;li&gt;Visualisasi pada tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda&lt;/li&gt;
+      &lt;li&gt;Merekam pembacaan perangkat&lt;/li&gt;
+      &lt;li&gt;Menampilkan pembacaan perangkat secara real-time&lt;/li&gt;
+      &lt;li&gt;Deteksi, pengurutan, ekstraksi fitur, dan pengelompokan lonjakan sinyal&lt;/li&gt;
       &lt;li&gt;Stimuli generator&lt;/li&gt;
+      &lt;li&gt;Transformasi menggunakan Fast Independent Component Analysis&lt;/li&gt;
+      &lt;li&gt;Merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT&lt;/li&gt;
       &lt;/ul&gt;
       </string>
      </property>

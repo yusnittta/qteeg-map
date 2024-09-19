@@ -1,14 +1,12 @@
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg
-
-plt.style.use('dark_background')
-
-
-class MplCanvas(FigureCanvasQTAgg):
-    def __init__(self, parent=None, width=10, height=6, dpi=100):
-        self.figure, self.axes = plt.subplots(nrows=2,
-                                              ncols=2,
-                                              figsize=(width, height),
-                                              dpi=dpi,
-                                              tight_layout=True)
-        super(MplCanvas, self).__init__(self.figure)
+import matplotlib.pyplot as plt                                                  #Mengimpor matplotlib.pyplot sebagai plt untuk membuat grafik
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg                 #Mengimpor FigureCanvasQTAgg dari matplotlib.backends.backend_qt5agg untuk menggunakan Matplotlib di dalam aplikasi berbasis Qt
+plt.style.use('dark_background')                                                 #Mengatur gaya visual plot menjadi latar belakang gelap dengan plt.style.use()
+                                                                                
+class MplCanvas(FigureCanvasQTAgg):                                              #Mendefinisikan kelas MplCanvas yang merupakan turunan dari FigureCanvasQTAgg untuk menampilkan grafik Matplotlib pada widget Qt
+    def __init__(self, parent=None, width=10, height=6, dpi=100):                #Fungsi __init__ adalah konstruktor yang dijalankan saat objek kelas dibuat
+        self.figure, self.axes = plt.subplots(nrows=2,                           #Membuat figure dan axes dengan subplots berukuran 2x2
+                                              ncols=2,        
+                                              figsize=(width, height),           #Ukuran canvas
+                                              dpi=dpi,                           #Resolusi gambar
+                                              tight_layout=True)                 #Menghindari overlap antar plot
+        super(MplCanvas, self).__init__(self.figure)                             #Memanggil konstruktor kelas induk (FigureCanvasQTAgg) dan meneruskan figure yang telah dibuat

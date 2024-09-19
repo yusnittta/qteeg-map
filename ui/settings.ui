@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Settings</string>
+   <string>Pengaturan</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
@@ -41,7 +41,7 @@
      </property>
      <widget class="QWidget" name="tab">
       <attribute name="title">
-       <string>Electrodes Colours</string>
+       <string>Warna Elektroda</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
@@ -88,7 +88,7 @@
      </widget>
      <widget class="QWidget" name="tab_2">
       <attribute name="title">
-       <string>Frequency Band Colours</string>
+       <string>Warna Pita Frekuensi</string>
       </attribute>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="1" column="0">

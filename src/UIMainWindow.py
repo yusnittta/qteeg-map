@@ -1,163 +1,148 @@
-import abc
-import configparser
-from typing import Optional, Dict
-import pyqtgraph as pg
-
-from PyQt5 import QtWidgets, uic
-from PyQt5.QtCore import QThread
-from PyQt5.QtWidgets import QFileDialog, QCheckBox, QButtonGroup, QLabel
-
-import ui.resources  # noqa: F401
-
-from src.MplWindow import MplWindow
-from src.about import AboutWindow
-from src.frequency import Frequency
-from src.help import HelpWindow
-from src.settings import SettingsWindow
-from src.stream_worker import StreamWorker
-
-
-class UIMainWindow(QtWidgets.QMainWindow):
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        uic.loadUi("ui/mainwindow.ui", self)
-
-        self.config = configparser.ConfigParser()
-        self.colours: Dict[str, str] = {}
-        self._read_settings()
-        self.current_file: str = ""
-        self.electrodes_group: QButtonGroup = QButtonGroup(self)
-        self.frequency_group: QButtonGroup = QButtonGroup(self)
-        self.graphicsLayout: pg.GraphicsLayout = pg.GraphicsLayout()
-        self.main_series: str = 'TP9'
-        self.main_band: Frequency = None
-        self.message: QLabel = QLabel()
-        self.single_frequency: bool = False
-        self.spike_detection_window = MplWindow(self)
-        self.spike_sorting_window = MplWindow(self)
-        self.feature_extraction_window = MplWindow(self)
-        self.clustering_window = MplWindow(self)
-        self.wave_clusters_window = MplWindow(self)
-        self.stream_thread: QThread = QThread()
-        self.stream_worker: StreamWorker = StreamWorker()
-
-        self._connect_menu()
-        self.graphicsView.setAntialiasing(True)
-        self.graphicsView.setBackground('k')
-        self.statusbar.addPermanentWidget(self.message)
-        self.statusbar.showMessage("Ready")
-
-    @abc.abstractmethod
-    def _load_file(self):
-        pass
-
-    @abc.abstractmethod
-    def _toggle_frequency(self, disabled: Optional[bool] = True,
-                          exclusive: Optional[bool] = False) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _checkbox_state(self, checkbox: QCheckBox, label: str) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _spike_detection_window(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _spike_sorting_window(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _clustering_window(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _wave_clusters_window(self) -> None:
-        pass
-
-    @abc.abstractmethod
-    def _feature_extraction_window(self) -> None:
-        pass
-
-    def _report_progress(self, message: str) -> None:
-        """
-        Slot to report message.
-
-        Parameters
-        ----------
-        message: str
-
-        Returns
-        -------
-        None
-        """
-        self.statusbar.showMessage(message)
-
-    def _close_stream(self) -> None:
-        """
-        Close stream from device.
-
-        Returns
-        -------
-        None
-        """
-        self.stream_worker.finish()
-        self.stream_thread.quit()
-        self.stream_thread.wait()
-        self._report_progress('Disconnected')
-
-        self.actionStream.setDisabled(False)
-        self.actionDisconnect.setDisabled(True)
-
-    def _stream_thread(self) -> None:
-        """
-        Create thread for streaming functionality.
-
-        Returns
-        -------
-        None
-        """
-        self.stream_thread = QThread()
-        self.stream_worker = StreamWorker()
-        self.stream_worker.moveToThread(self.stream_thread)
-        self.stream_thread.started.connect(self.stream_worker.run)
-        self.stream_worker.finished.connect(self.stream_thread.quit)
-        self.stream_worker.finished.connect(self.stream_worker.deleteLater)
-        self.stream_thread.finished.connect(self.stream_thread.deleteLater)
-        self.stream_worker.progress.connect(self._report_progress)
-        self.stream_thread.start()
-
-        self.actionStream.setDisabled(True)
-        self.actionDisconnect.setDisabled(False)
-
-        self.stream_thread.finished.connect(
-            lambda: self._report_progress('Disconnected')
-        )
-
-    def _about_dialog(self) -> None:
-        """
-        Open about dialog.
-
-        Returns
-        -------
-        None
-        """
-        dialog = AboutWindow(self)
-        dialog.exec()
-
-    def _help_dialog(self) -> None:
-        """
-        Open help dialog window.
-
-        Returns
-        -------
-        None
-        """
-        dialog = HelpWindow(self)
-        dialog.exec()
-
+import abc                                                                  #Mengimpor modul abc untuk mendukung kelas abstrak dan metode dalam Python
+import configparser                                                         #Mengimpor modul configparser untuk membaca dan menulis file konfigurasi
+from typing import Optional, Dict                                           #Mengimpor Optional dan Dict dari modul typing untuk tipe data yang lebih fleksibel
+import pyqtgraph as pg                                                      #Mengimpor pyqtgraph dengan alias pg untuk grafik dan visualisasi data
+from PyQt5 import QtWidgets, uic                                            #Mengimpor modul QtWidgets dan uic dari PyQt5 untuk antarmuka pengguna grafis
+from PyQt5.QtCore import QThread                                            #Mengimpor QThread dari QtCore untuk threading dalam aplikasi Qt
+from PyQt5.QtWidgets import QFileDialog, QCheckBox, QButtonGroup, QLabel    #Mengimpor kelas widget khusus dari PyQt5
+import ui.resources  # noqa: F401                                           #Mengimpor modul resources dari direktori ui, menandakan tidak ada masalah dengan impor yang tidak digunakan
+from src.MplWindow import MplWindow                                         #Mengimpor kelas MplWindow dari modul MplWindow dalam direktori src
+from src.about import AboutWindow                                           #Mengimpor kelas AboutWindow dari modul about dalam direktori src
+from src.frequency import Frequency                                         #Mengimpor kelas Frequency dari modul frequency dalam direktori src
+from src.help import HelpWindow                                             #Mengimpor kelas HelpWindow dari modul help dalam direktori src
+from src.settings import SettingsWindow                                     #Mengimpor kelas SettingsWindow dari modul settings dalam direktori src
+from src.stream_worker import StreamWorker                                  #Mengimpor kelas StreamWorker dari modul stream_worker dalam direktori src
+ 
+class UIMainWindow(QtWidgets.QMainWindow):                                  #Mendefinisikan kelas UIMainWindow yang mewarisi dari QMainWindow
+    
+    def __init__(self, *args, **kwargs):                                    #Inisialisasi konstruktor untuk UIMainWindow
+        super().__init__(*args, **kwargs)                                   #Memanggil konstruktor dari kelas induk (QMainWindow)
+        uic.loadUi("ui/mainwindow.ui", self)                                #Memuat antarmuka pengguna dari file UI dan menghubungkannya dengan instance ini
+        self.config = configparser.ConfigParser()                           #Membuat parser konfigurasi untuk membaca file konfigurasi
+        self.colours: Dict[str, str] = {}                                   #Mendeklarasikan dictionary kosong untuk menyimpan warna
+        self._read_settings()                                               #Memanggil metode untuk membaca pengaturan dari file konfigurasi
+        self.current_file: str = ""                                         #Mendeklarasikan string kosong untuk menyimpan nama file saat ini
+        self.electrodes_group: QButtonGroup = QButtonGroup(self)            #Membuat grup tombol untuk elektroda
+        self.frequency_group: QButtonGroup = QButtonGroup(self)             #Membuat grup tombol untuk frekuensi
+        self.graphicsLayout: pg.GraphicsLayout = pg.GraphicsLayout()        #Membuat layout grafik untuk menampilkan grafik
+        self.main_series: str = 'TP9'                                       #Mendeklarasikan string untuk menyimpan seri utama
+        self.main_band: Frequency = None                                    #Mendeklarasikan variabel untuk menyimpan objek Frequency, diinisialisasi sebagai None
+        self.message: QLabel = QLabel()                                     #Membuat QLabel untuk menampilkan pesan status
+        self.single_frequency: bool = False                                 #Mendeklarasikan boolean untuk menentukan apakah hanya satu frekuensi yang digunakan
+        self.spike_detection_window = MplWindow(self)                       #Membuat instance jendela deteksi spike menggunakan MplWindow
+        self.spike_sorting_window = MplWindow(self)                         #Membuat instance jendela sorting spike menggunakan MplWindow
+        self.feature_extraction_window = MplWindow(self)                    #Membuat instance jendela ekstraksi fitur menggunakan MplWindow
+        self.clustering_window = MplWindow(self)                            #Membuat instance jendela clustering menggunakan MplWindow
+        self.wave_clusters_window = MplWindow(self)                         #Membuat instance jendela gelombang terklaster menggunakan MplWindow
+        self.stream_thread: QThread = QThread()                             #Membuat thread untuk menangani streaming data
+        self.stream_worker: StreamWorker = StreamWorker()                   #Membuat instance StreamWorker untuk menangani pemrosesan data streaming
+        self._connect_menu()                                                #Memanggil metode untuk menghubungkan item menu dengan fungsinya
+        self.graphicsView.setAntialiasing(True)                             #Mengaktifkan antialiasing untuk tampilan grafik
+        self.graphicsView.setBackground('k')                                #Mengatur latar belakang tampilan grafik menjadi hitam
+        self.statusbar.addPermanentWidget(self.message)                     #Menambahkan widget pesan status ke status bar
+        self.statusbar.showMessage("Siap")                                  #Menampilkan pesan "Siap" di status bar
+  
+    @abc.abstractmethod  
+    def _load_file(self):                                                   #Mendefinisikan metode abstrak yang bertanggung jawab untuk memuat file
+        pass   
+   
+    @abc.abstractmethod   
+    def _toggle_frequency(self, disabled: Optional[bool] = True,            #Mendefinisikan metode abstrak untuk menonaktifkan atau mengaktifkan frekuensi
+                          exclusive: Optional[bool] = False) -> None:       #Parameter `disabled` untuk menentukan apakah frekuensi dinonaktifkan, dan `exclusive` untuk menentukan apakah hanya satu frekuensi yang eksklusif
+        pass  
+  
+    @abc.abstractmethod  
+    def _checkbox_state(self, checkbox: QCheckBox, label: str) -> None:     #Mendefinisikan metode abstrak untuk mengatur status checkbox berdasarkan label
+        pass  
+  
+    @abc.abstractmethod  
+    def _spike_detection_window(self) -> None:                              #Mendefinisikan metode abstrak untuk menampilkan jendela deteksi spike
+        pass  
+  
+    @abc.abstractmethod  
+    def _spike_sorting_window(self) -> None:                                #Mendefinisikan metode abstrak untuk menampilkan jendela sorting spike
+        pass  
+  
+    @abc.abstractmethod  
+    def _clustering_window(self) -> None:                                   #Mendefinisikan metode abstrak untuk menampilkan jendela clustering
+        pass  
+  
+    @abc.abstractmethod   
+    def _wave_clusters_window(self) -> None:                                #Mendefinisikan metode abstrak untuk menampilkan jendela gelombang terklaster
+        pass   
+   
+    @abc.abstractmethod  
+    def _feature_extraction_window(self) -> None:                           #Mendefinisikan metode abstrak untuk menampilkan jendela ekstraksi fitur
+        pass   
+  
+    def _report_progress(self, message: str) -> None:                       #Mendefinisikan metode untuk melaporkan pesan ke status bar
+        """                                                                 #Docstring
+        Slot to report message.  
+        Parameters  
+        ---------------
+        message: str                                                        #Parameter `message` bertipe string yang berisi pesan yang akan dilaporkan
+        Returns  
+        ---------------
+        None                                                                #Tidak mengembalikan nilai
+        """  
+        self.statusbar.showMessage(message)                                 #Menampilkan pesan di status bar aplikasi
+  
+    def _close_stream(self) -> None:                                        #Mendefinisikan metode untuk menutup stream dari perangkat
+        """                                                                 #Docstring
+        Close stream from device. 
+        Returns 
+        ---------------
+        None                                                                #Tidak mengembalikan nilai
+        """ 
+        self.stream_worker.finish()                                         #Menghentikan proses di `stream_worker`
+        self.stream_thread.quit()                                           #Menghentikan thread dengan mengirimkan sinyal `quit`
+        self.stream_thread.wait()                                           #Menunggu hingga thread selesai menjalankan tugasnya
+        self._report_progress('Disconnected')                               #Melaporkan status 'Disconnected' di status bar
+        self.actionStream.setDisabled(False)                                #Mengaktifkan kembali aksi 'Stream' di antarmuka pengguna
+        self.actionDisconnect.setDisabled(True)                             #Menonaktifkan aksi 'Disconnect' di antarmuka pengguna
+  
+    def _stream_thread(self) -> None:                                               #Mendefinisikan metode untuk membuat thread streaming
+        """                                                                         #Docstring
+        Create thread for streaming functionality. 
+        Returns 
+        ---------------
+        None                                                                        #Tidak mengembalikan nilai
+        """   
+        self.stream_thread = QThread()                                              #Membuat instance dari `QThread` untuk menangani streaming
+        self.stream_worker = StreamWorker()                                         #Membuat instance dari `StreamWorker` yang akan dijalankan di dalam thread                      
+        self.stream_worker.moveToThread(self.stream_thread)                         #Memindahkan `stream_worker` ke dalam `stream_thread`
+        self.stream_thread.started.connect(self.stream_worker.run)                  #Menghubungkan sinyal `started` dari thread ke metode `run` dari `stream_worker'
+        self.stream_worker.finished.connect(self.stream_thread.quit)                #Menghubungkan sinyal `finished` dari `stream_worker` untuk menghentikan thread
+        self.stream_worker.finished.connect(self.stream_worker.deleteLater)         #Menghubungkan sinyal `finished` untuk menghapus `stream_worker` setelah selesai
+        self.stream_thread.finished.connect(self.stream_thread.deleteLater)         #Menghubungkan sinyal `finished` untuk menghapus `stream_thread` setelah selesai
+        self.stream_worker.progress.connect(self._report_progress)                  #Menghubungkan sinyal `progress` dari `stream_worker` ke metode `_report_progress`
+        self.stream_thread.start()                                                  #Memulai thread streaming
+        self.actionStream.setDisabled(True)                                         #Menonaktifkan aksi 'Stream' di antarmuka pengguna saat streaming dimulai
+        self.actionDisconnect.setDisabled(False)                                    #Mengaktifkan aksi 'Disconnect' di antarmuka pengguna saat streaming dimulai
+        self.stream_thread.finished.connect(                                        #Menghubungkan sinyal `finished` dari thread untuk melaporkan status 'Disconnected'
+            lambda: self._report_progress('Disconnected')                           #Menggunakan lambda untuk melaporkan status 'Disconnected' setelah thread selesai
+        ) 
+   
+    def _about_dialog(self) -> None:                #Mendefinisikan metode untuk membuka dialog 'About'    
+        """                                         #Docstring
+        Open about dialog.  
+        Returns 
+        ---------------
+        None                                        #Tidak mengembalikan nilai
+        """   
+        dialog = AboutWindow(self)                  #Membuat instance dari kelas `AboutWindow`, sebuah jendela dialog tentang aplikasi
+        dialog.exec()                               #Menjalankan dialog secara modal, menunggu hingga dialog ditutup sebelum melanjutkan eksekusi
+  
+    def _help_dialog(self) -> None:                 #Mendefinisikan metode untuk membuka dialog 'Help'
+        """                                         #Docstring
+        Open help dialog window.  
+        Returns    
+        ----------------
+        None                                        #Tidak mengembalikan nilai
+        """ 
+        dialog = HelpWindow(self)                   #Membuat instance dari kelas `HelpWindow`, sebuah jendela dialog bantuan
+        dialog.exec()                               #Menjalankan dialog secara modal, menunggu hingga dialog ditutup sebelum melanjutkan eksekusi
+  
     def _read_settings(self):
         self.config.read('settings.ini')
         if len(self.config.sections()) == 0:
@@ -243,7 +228,7 @@ class UIMainWindow(QtWidgets.QMainWindow):
             self,
             caption="QFileDialog.getOpenFileName()",
             directory="./assets",
-            filter="Comma Separated Values (*.csv)",
+            filter="Data Files (*.csv *.edf *.bdf *.mat);;Comma Separated Values (*.csv);;EDF Files (*.edf);;BDF Files (*.bdf);;MAT Files (*.mat)",
             options=options)
 
         self._load_file()

@@ -14,13 +14,13 @@ def prepare_palette() -> QPalette:
     QPalette
     """
     palette = QPalette()
-    palette.setColor(QPalette.Window, QColor(43, 43, 43))
-    palette.setColor(QPalette.Base, QColor(43, 43, 43).lighter())
+    palette.setColor(QPalette.Window, QColor(0, 60, 127))
+    palette.setColor(QPalette.Base, QColor(169, 204, 227))
     palette.setColor(QPalette.AlternateBase, QColor(53, 53, 53))
     palette.setColor(QPalette.ToolTipBase, QtCore.Qt.white)
-    palette.setColor(QPalette.Text, QtCore.Qt.white)
+    palette.setColor(QPalette.Text, QtCore.Qt.black)
     palette.setColor(QPalette.WindowText, QtCore.Qt.white)
-    palette.setColor(QPalette.Button, QColor(53, 53, 53))
+    palette.setColor(QPalette.Button, QColor(40, 116, 166))
     palette.setColor(QPalette.ButtonText, QtCore.Qt.white)
     palette.setColor(QPalette.BrightText, QtCore.Qt.red)
     palette.setColor(QPalette.Highlight, QColor(47, 101, 202))
