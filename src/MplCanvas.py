@@ -4,8 +4,8 @@ plt.style.use('dark_background')                                                
                                                                                 
 class MplCanvas(FigureCanvasQTAgg):                                              #Mendefinisikan kelas MplCanvas yang merupakan turunan dari FigureCanvasQTAgg untuk menampilkan grafik Matplotlib pada widget Qt
     def __init__(self, parent=None, width=10, height=6, dpi=100):                #Fungsi __init__ adalah konstruktor yang dijalankan saat objek kelas dibuat
-        self.figure, self.axes = plt.subplots(nrows=2,                           #Membuat figure dan axes dengan subplots berukuran 2x2
-                                              ncols=2,        
+        self.figure, self.axes = plt.subplots(nrows=4,                           #Membuat figure dan axes dengan subplots berukuran 2x2
+                                              ncols=4,        
                                               figsize=(width, height),           #Ukuran canvas
                                               dpi=dpi,                           #Resolusi gambar
                                               tight_layout=True)                 #Menghindari overlap antar plot

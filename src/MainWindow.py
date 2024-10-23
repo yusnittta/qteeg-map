@@ -21,9 +21,9 @@ matplotlib.use('Qt5Agg')                                    #Mengatur backend ma
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG) #Mengkonfigurasi pengaturan dasar untuk logging, mengarahkan output log ke stdout dan mengatur level log ke DEBUG
  
 #Jendela Utama
-class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi dari UIMainWindow, kelas utama untuk antarmuka pengguna aplikasi
-    def __init__(self, *args, **kwargs):           #Konstruktor untuk inisialisasi objek MainWindow dan menerima argumen opsional
-        super().__init__(*args, **kwargs)          #Memanggil konstruktor induk (UIMainWindow) untuk inisialisasi dasar     
+class MainWindow(UIMainWindow):                         #Kelas MainWindow mewarisi dari UIMainWindow, kelas utama untuk antarmuka pengguna aplikasi
+    def __init__(self, *args, **kwargs):                #Konstruktor untuk inisialisasi objek MainWindow dan menerima argumen opsional
+        super().__init__(*args, **kwargs)               #Memanggil konstruktor induk (UIMainWindow) untuk inisialisasi dasar     
         self.active_bands: List[Frequency] = []                         #Daftar untuk menyimpan frekuensi aktif yang sedang digunakan
         self.active_series: List[str] = []                              #Daftar untuk menyimpan seri data aktif yang sedang digunakan
         self.axis_items: List[Tuple[str, Frequency, pg.AxisItem]] = []  #Daftar item sumbu, setiap item adalah tuple berisi nama sumbu, frekuensi, dan objek AxisItem dari pyqtgraph
@@ -31,16 +31,28 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self.plotItem: pg.PlotItem = None                               #Objek PlotItem dari pyqtgraph untuk menampilkan grafik
         self.viewBox1: pg.ViewBox = None                                #Objek ViewBox dari pyqtgraph untuk tampilan grafik, kemungkinan view utama
         self.view_boxes: List[pg.ViewBox] = []                          #Daftar untuk menyimpan beberapa objek ViewBox dari pyqtgraph
-        self.spikes = {                           #Kamus untuk menyimpan objek Spike yang terkait dengan masing-masing lokasi elektroda
-            'TP9': Spike('TP9'),                  #Membuat objek Spike untuk lokasi 'TP9'
-            'AF7': Spike('AF7'),                  #Membuat objek Spike untuk lokasi 'AF7'
-            'AF8': Spike('AF8'),                  #Membuat objek Spike untuk lokasi 'AF8'
-            'TP10': Spike('TP10')                 #Membuat objek Spike untuk lokasi 'TP10'
+        self.spikes = {                                 #Kamus untuk menyimpan objek Spike yang terkait dengan masing-masing lokasi elektroda
+            'FP1': Spike('FP1'),                  
+            'FP2': Spike('FP2'),                  
+            'F3': Spike('F3'),                  
+            'F4': Spike('F4'),
+            'C3': Spike('C3'), 
+            'C4': Spike('C4'),               
+            'P3': Spike('P3'),                  
+            'P4': Spike('P4'),                  
+            'O1': Spike('O1'),
+            'O2': Spike('O2'),                  
+            'F7': Spike('F7'),                  
+            'F8': Spike('F8'),                  
+            'T3': Spike('T3'),
+            'T4': Spike('T4'),                  
+            'T5': Spike('T5'),                  
+            'T6': Spike('T6')                   
         } 
-        self._prepare_frequency_bands()           #Menyiapkan pita frekuensi
-        self._prepare_modes()                     #Menyiapkan mode operasi
-        self._prepare_electrodes()                #Menyiapkan elektroda
-                
+        self._prepare_frequency_bands()                 #Menyiapkan pita frekuensi
+        self._prepare_modes()                           #Menyiapkan mode operasi
+        self._prepare_electrodes()                      #Menyiapkan elektroda    
+            
     @staticmethod  
     def zip_longer(labels: List[Any],                       #Menggabungkan dua daftar dengan panjang yang tidak sama
                    bands: Optional[List[Any]]) -> zip:      #Parameter 'bands' adalah daftar yang mungkin kosong dan fungsi ini akan mengembalikan objek zip
@@ -97,17 +109,17 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
                   
     def _default_electrode(self) -> None:           #Mendefinisikan metode untuk mengatur electrode default
         """                                         #Docstring
-        Select TP9 as main and active series.      
+        Select FP1 as main and active series.      
         Returns      
         -----------
         None                                        #Tidak mengembalikan nilai
-        """       
-        self.active_series.append('TP9')            #Menambahkan 'TP9' ke daftar seri aktif
-        self.main_series = 'TP9'                    #Mengatur 'TP9' sebagai seri utama
-        self.checkboxTP9.blockSignals(True)         #Menonaktifkan sinyal dari checkboxTP9 sementara
-        self.checkboxTP9.setChecked(True)           #Menandai checkboxTP9 sebagai dicentang
-        self.checkboxTP9.blockSignals(False)        #Mengaktifkan kembali sinyal untuk checkboxTP9
-      
+        """  
+        self.active_series.append('FP1')            #Menambahkan 'FP1' ke daftar seri aktif
+        self.main_series = 'FP1'                    #Mengatur 'FP1' sebagai seri utama
+        self.checkboxFP1.blockSignals(True)         #Menonaktifkan sinyal dari checkboxFP1 sementara
+        self.checkboxFP1.setChecked(True)           #Menandai checkboxFP1 sebagai dicentang
+        self.checkboxFP1.blockSignals(False)        #Mengaktifkan kembali sinyal untuk checkboxFP1
+   
     def _default_band(self) -> None:                        #Mendefinisikan metode untuk mengatur band default
         """                                                 #Docstring
         Select Frequency.GAMMA as main and active band.     
@@ -261,11 +273,10 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self._prepare_canvas()                                                  #Siapkan kanvas untuk menampilkan grafik
         self._plot()                                                            #Gambar grafik dengan seri utama yang telah diatur
  
-      
-#Membaca Data Format CSV, EDF, BDF, MAT
+#Membaca Data Format CSV, EDF, BDF, MAT, TXT
     def _read_data(self) -> pd.DataFrame:                                            #Mendefinisikan metode _read_data yang mengembalikan objek pd.DataFrame
         """                                                                          #Docstring
-        Read data file with recordings (CSV, EDF, BDF, MAT).   
+        Read data file with recordings (CSV, EDF, BDF, MAT, TXT).   
         Returns     
         ---------------
         pd.DataFrame                                                                 #Mengembalikan hasil dalam bentuk DataFrame dari pandas                                                     
@@ -303,16 +314,24 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
             else:                                                               #Menghasilkan error jika kunci 'time' tidak ditemukan
                 raise ValueError("No 'time' key found in the MAT file.")
 
-            # Collect the signals (TP9, AF7, AF8, TP10, Right_AUX)
-            signals = {key: mat_data[key] for key in ['TP9', 'AF7', 'AF8', 'TP10', 'Right_AUX']}    #Mengekstrak sinyal
+            # Collect the signals
+            signal_keys = ['FP1', 'FP2', 'F3', 'F4', 'C3', 'C4',
+                           'P3', 'P4', 'O1', 'O2', 'F7', 'F8', 'T3', 'T4', 'T5', 'T6']
+            signals = {key: mat_data['data'][i] for i, key in enumerate(signal_keys)}   
 
             # Create a DataFrame with 'time' as index and signals as columns
             eeg_df = pd.DataFrame(signals, index=pd.to_datetime(time_data * 1e9))                   #Mengonversi 'time' menjadi datetime
             
             return eeg_df                                                                           #Mengembalikan DataFrame
-        else:                                              #Menghasilkan error untuk format file yang tidak didukung
+        
+        elif self.current_file.endswith('.txt'):                                                    #Check for TXT file
+        # If TXT, read using pandas
+            eeg = pd.read_csv(self.current_file, sep='\t', index_col=0)                             #Read TXT file into DataFrame, assuming tab-separated
+            eeg.index = pd.to_datetime((eeg.index * 1000000000).astype(np.int64))                   #Convert index to datetime
+            return eeg                                                                              #Return DataFrame
+
+        else:                                                                                       #Menghasilkan error untuk format file yang tidak didukung
             raise ValueError("Unsupported file format.")
- 
  
     def _draw_readings(self) -> None:                                #Mendefinisikan metode _draw_readings untuk menggambar pembacaan file
         """                                                          #Docstring
@@ -339,7 +358,7 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         """       
         self.data = None                                                #Menginisialisasi data dengan None
         if self.graphicsLayout:                                         #Jika layout grafik ada, bersihkan layout tersebut
-            self._clean()   
+            self._clean()
         self._draw_readings()                                           #Menggambar pembacaan dari file
         self.message.setText(f"Current file: {self.current_file}")      #Menampilkan nama file saat ini di pesan
         self._reselect_checkboxes()                                     #Menyusun ulang status checkbox
@@ -349,9 +368,12 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self.radioFrequencyMultiple.setDisabled(False)                  #Mengaktifkan radio button frekuensi ganda
         self.actionSpike_detecting.setDisabled(False)                   #Mengaktifkan opsi deteksi spike
         self.actionSpike_sorting.setDisabled(False)                     #Mengaktifkan opsi sorting spike
-        self.actionFeature_extraction.setDisabled(False)                #Mengaktifkan opsi ekstraksi fitur
+        self.actionFeature_extraction.setDisabled(False)                #Mengaktifkan opsi ekstraksi fitur dengan FastICA
         self.actionClustering.setDisabled(False)                        #Mengaktifkan opsi clustering
-                  
+        self.actionPCA_extraction.setDisabled(False)                    #Mengaktifkan opsi ekstraksi fitur dengan PCA
+        self.actionTopoplot.setDisabled(False)                          #Mengaktifkan opsi plot scalp map
+        self.actionSpectrum.setDisabled(False)                          #Mengaktifkan opsi plot Power Spectral Density
+        
     def _toggle_frequency(self, disabled: Optional[bool] = True,            #Mendefinisikan fungsi dengan dua parameter opsional: 'disabled' dan 'exclusive'
                           exclusive: Optional[bool] = False) -> None:       
         """                                                                 #Docstring
@@ -369,8 +391,7 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         """   
         self.frequency_group.setExclusive(exclusive)                        #Menentukan apakah hanya satu frekuensi yang bisa dipilih di dalam grup frekuensi
         self.single_frequency = False                                       #Mengatur frekuensi tunggal menjadi False secara default
-        self.main_series = 'TP9'                                            #Menetapkan elektroda utama untuk visualisasi sebagai TP9
-        
+        self.main_series = 'FP1'                                            #Menggunakan FP1 sebagai elektroda utama
         if not disabled and not exclusive:                                  #Jika frekuensi tidak dinonaktifkan dan tidak eksklusif
             self.electrodes_group.setExclusive(True)                        #Mengatur agar hanya satu elektroda yang bisa dipilih dalam satu waktu
         else:                                                               #Jika tidak, atur mode frekuensi tunggal menjadi True
@@ -696,18 +717,30 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self.spike_sorting_window.plot_sorted_spikes(last=None)                  #Memplot spike yang diurutkan, tanpa batas spike terakhir
         self.spike_sorting_window.show()                                         #Menampilkan jendela pengurutan spike
    
-#Jendela Ekstraksi Fitur  
-    def _feature_extraction_window(self):                                        #Mendefinisikan fungsi untuk membuka jendela ekstraksi fitur
+#Jendela Ekstraksi Fitur dengan FastICA
+    def _feature_extraction_window(self):                                        #Mendefinisikan fungsi untuk membuka jendela ekstraksi fitur dengan FastICA
         """                                                                      #Docstring
         Open Feature Extraction window. 
         Returns 
         ---------------
         None                                                                     #Tidak mengembalikan nilai
         """  
-        self.feature_extraction_window.set_values(self.data, self.spikes)        #Mengatur data dan spike untuk jendela ekstraksi fitur
+        self.feature_extraction_window.set_values(self.data, self.spikes)        #Mengatur data dan spike untuk jendela ekstraksi fitur dengan FastICA
         self.feature_extraction_window.plot_features()                           #Memplot fitur yang diekstraksi
-        self.feature_extraction_window.show()                                    #Menampilkan jendela ekstraksi fitur
-   
+        self.feature_extraction_window.show()                                    #Menampilkan jendela ekstraksi fitur dengan FastICA
+
+#Jendela Ekstraksi Fitur dengan PCA
+    def _pca_extraction_window(self):                                            #Mendefinisikan fungsi untuk membuka jendela ekstraksi fitur dengan PCA
+        """                                                                      #Docstring
+        Open PCA Extraction window.
+        Returns
+        ---------------
+        None                                                                     #Tidak mengembalikan nilai
+        """
+        self.pca_extraction_window.set_values(self.data, self.spikes)            #Mengatur data dan spike untuk jendela ekstraksi fitur dengan FastICA
+        self.pca_extraction_window.plot_pca_features()                           #Memplot fitur yang diekstraksi
+        self.pca_extraction_window.show()                                        #Menampilkan jendela ekstraksi fitur dengan FastICA
+
 #Jendela Pengelompokan Spike
     def _clustering_window(self):                                                #Mendefinisikan fungsi untuk membuka jendela klastering
         """                                                                      #Docstring
@@ -719,6 +752,7 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self.clustering_window.set_values(self.data, self.spikes)                #Mengatur data dan spike untuk jendela klastering
         self.clustering_window.plot_clusters()                                   #Memplot klaster berdasarkan data
         self.clustering_window.show()                                            #Menampilkan jendela klastering
+    
     def _wave_clusters_window(self) -> None:                                     #Mendefinisikan fungsi untuk membuka jendela gelombang yang terklaster
         """                                                                      #Docstring
         Open Clustered wave window. 
@@ -729,6 +763,30 @@ class MainWindow(UIMainWindow):                    #Kelas MainWindow mewarisi da
         self.wave_clusters_window.set_values(self.data, self.spikes)             #Mengatur data dan spike untuk jendela gelombang yang terklaster
         self.wave_clusters_window.plot_clustered_waves()                         #Memplot gelombang yang terklaster
         self.wave_clusters_window.show()                                         #Menampilkan jendela gelombang yang terklaster
+
+#Jendela Topographical Scalp Map  
+    def _topoplot_window(self) -> None:                                          #Mendefinisikan fungsi untuk membuka jendela ploting scalp map
+        """                                                                      #Docstring
+        Open Topolot window.
+        Returns
+        ---------------
+        None                                                                     #Tidak mengembalikan nilai
+        """
+        self.topoplot_window.set_values(self.data, self.spikes)                  #Mengatur data dan spike untuk jendela ploting scalp map
+        self.topoplot_window.plot_topoplot()                                     #Memplot topographical scalp map
+        self.topoplot_window.show()                                              #Menampilkan jendela scalp map
+
+#Jendela Plot Power Spectral Density (PSD)  
+    def _spectrum_window(self) -> None:                                          #Mendefinisikan fungsi untuk membuka jendela ploting Power Spectral Density
+        """                                                                      #Docstring
+        Open Topolot window.
+        Returns
+        ---------------
+        None                                                                     #Tidak mengembalikan nilai
+        """
+        self.spectrum_window.set_values(self.data, self.spikes)                  #Mengatur data dan spike untuk jendela ploting Power Sepctral Density
+        self.spectrum_window.plot_spectrum()                                     #Memplot Power Spectral Density
+        self.spectrum_window.show()                                              #Menampilkan jendela
    
     @staticmethod                                                                
     def _find_minimum_index(data: np.array, start: int, end: int) -> int:        #Mendefinisikan metode statis yang mencari indeks elemen minimum dalam rentang yang ditentukan

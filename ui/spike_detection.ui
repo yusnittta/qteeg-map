@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Analisis Lonjakan Sinyal</string>
+   <string>Hasil Ploting</string>
   </property>
   <widget class="MplCanvas" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">

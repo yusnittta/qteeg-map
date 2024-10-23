@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icon/icon.svg</normaloff>:/icon/icon.svg</iconset>
+    <normaloff>:/icon/</normaloff>:/icon/</iconset>
   </property>
   <property name="autoFillBackground">
    <bool>false</bool>
@@ -47,42 +47,162 @@
        <item row="0" column="0">
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>TP9</string>
+          <string>FP1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>F3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>F4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_1">
+         <property name="text">
+          <string>FP2</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0">
-        <widget class="QLabel" name="label_3">
-         <property name="text">
-          <string>AF8</string>
-         </property>
-        </widget>
-       </item>
-       <item row="5" column="0">
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>TP10</string>
+          <string>C3</string>
          </property>
         </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="tp9_colour"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
+        </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="label_5">
          <property name="text">
-          <string>AF7</string>
+          <string>C4</string>
+         </property>
+        </widget>
+        </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>P3</string>
+         </property>
+        </widget>
+        </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="label_7">
+         <property name="text">
+          <string>P4</string>
+         </property>
+        </widget>
+        </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="label_8">
+         <property name="text">
+          <string>O1</string>
+         </property>
+        </widget>
+        </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="label_9">
+         <property name="text">
+          <string>O2</string>
+         </property>
+        </widget>
+        </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="label_10">
+         <property name="text">
+          <string>F7</string>
+         </property>
+        </widget>
+        </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="text">
+          <string>F8</string>
+         </property>
+        </widget>
+        </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="label_12">
+         <property name="text">
+          <string>T3</string>
+         </property>
+        </widget>
+        </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="label_13">
+         <property name="text">
+          <string>T4</string>
+         </property>
+        </widget>
+        </item>
+       <item row="14" column="0">
+        <widget class="QLabel" name="label_14">
+         <property name="text">
+          <string>T5</string>
+         </property>
+        </widget>
+        </item>
+       <item row="15" column="0">
+        <widget class="QLabel" name="label_15">
+         <property name="text">
+          <string>T6</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLineEdit" name="af7_colour"/>
+        <widget class="QLineEdit" name="fp2_colour"/>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="f3_colour"/>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="f4_colour"/>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="fp1_colour"/>
        </item>
        <item row="4" column="1">
-        <widget class="QLineEdit" name="af8_colour"/>
+        <widget class="QLineEdit" name="c3_colour"/>
        </item>
        <item row="5" column="1">
-        <widget class="QLineEdit" name="tp10_colour"/>
+        <widget class="QLineEdit" name="c4_colour"/>
+       </item>
+       <item row="6" column="1">
+        <widget class="QLineEdit" name="p3_colour"/>
+        </item>
+       <item row="7" column="1">
+        <widget class="QLineEdit" name="p4_colour"/>
+        </item>
+       <item row="8" column="1">
+        <widget class="QLineEdit" name="o1_colour"/>
+        </item>
+       <item row="9" column="1">
+        <widget class="QLineEdit" name="o2_colour"/>
+        </item>
+       <item row="10" column="1">
+        <widget class="QLineEdit" name="f7_colour"/>
+        </item>
+       <item row="11" column="1">
+        <widget class="QLineEdit" name="f8_colour"/>
+        </item>
+       <item row="12" column="1">
+        <widget class="QLineEdit" name="t3_colour"/>
+        </item>
+       <item row="13" column="1">
+        <widget class="QLineEdit" name="t4_colour"/>
+        </item>
+       <item row="14" column="1">
+        <widget class="QLineEdit" name="t5_colour"/>
+        </item>
+       <item row="15" column="1">
+        <widget class="QLineEdit" name="t6_colour"/>
        </item>
       </layout>
      </widget>

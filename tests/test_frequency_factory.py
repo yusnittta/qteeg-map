@@ -1,4 +1,4 @@
-import pytest
+import pytest # type: ignore
 
 from src.frequency import Frequency
 from src.frequency_filter import (FilterFactory, GammaFilter, BetaFilter,

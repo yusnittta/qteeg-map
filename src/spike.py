@@ -7,8 +7,11 @@ from scipy.stats import median_absolute_deviation           #Mengimpor fungsi me
 from sklearn.cluster import KMeans                          #Mengimpor KMeans dari modul sklearn.cluster untuk algoritma clustering    
   
 #Independent Component Analysis (ICA)
-from sklearn.decomposition import FastICA                   #Mengimpor FastICA dari modul sklearn.decomposition untuk Independent Component Analysis
+from sklearn.decomposition import FastICA, PCA              #Mengimpor FastICA dari modul sklearn.decomposition untuk Independent Component Analysis
 from sklearn.preprocessing import StandardScaler            #Mengimpor StandardScaler dari modul sklearn.preprocessing untuk normalisasi data
+
+import matplotlib.pyplot as plt                             #Mengimpor matplotlib untuk visualisasi
+from scipy.interpolate import griddata                      #Mengimpor griddata untuk interpolasi data
       
 MIN_TIME_BETWEEN_SPIKES = 0.03                              #Menentukan waktu minimum antara spike dalam detik (30ms)
 SEARCH_PERIOD = 0.02                                        #Menentukan periode pencarian dalam detik (20ms)
@@ -29,6 +32,7 @@ class Spike:                                                #Mendefinisikan kela
         self.clusters: np.array = None                      #Menyimpan hasil clustering spike, diinisialisasi dengan None
         self.scaler = StandardScaler()                      #Menginisialisasi scaler untuk normalisasi data
         self.ica = FastICA(n_components=2)                  #Menginisialisasi FastICA untuk Independent Component Analysis dengan 2 komponen
+        self.pca = PCA(n_components=2)                      #Menginisialisasi FastICA untuk Principal Component Analysis dengan 2 komponen
         self.kmeans = KMeans(n_clusters=3)                  #Menginisialisasi KMeans untuk clustering dengan 3 klaster
       
     def set_data(self, data: pd.Series) -> None:            #Mendefinisikan metode set_data untuk mengatur data baru
@@ -74,7 +78,7 @@ class Spike:                                                #Mendefinisikan kela
             Numpy array with indexes of potential spikes.                               #Mengembalikan array numpy yang berisi indeks-indeks spike potensial
         """      
         data = self.data                                                        #Menyimpan data dari atribut self.data ke variabel lokal data
-        potential_spikes = np.diff(                                             #Menentukan spike potensial dengan memeriksa perubahan melewati ambang ba
+        potential_spikes = np.diff(                                             #Menentukan spike potensial dengan memeriksa perubahan melewati ambang batas
             ((data <= self.spike_threshold) |                                   #Mengevaluasi apakah nilai data lebih kecil atau sama dengan ambang batas spike atau lebih besar atau sama dengan ambang batas negatif
              (data >= -self.spike_threshold)).astype(int) > 0).nonzero()[0]  
         potential_spikes = potential_spikes[                                    #Menyaring spike potensial yang berada dalam batas ukuran gelombang
@@ -118,18 +122,28 @@ class Spike:                                                #Mendefinisikan kela
             Elemen pertama adalah array dengan data dari semua spike
             Elemen kedua adalah array dengan nilai rata-rata dari spike
         """     
-        if self.spikes is None:                                              #Jika spikes belum terdeteksi, panggil fungsi detect untuk mendeteksi spikes
+        if self.spikes is None:                                                         #Jika spikes belum terdeteksi, panggil fungsi detect untuk mendeteksi spikes
             _ = self.detect()      
-        waves = []                                                           #Daftar untuk menyimpan gelombang (waves) dari setiap spike
-        for index in self.spikes:                                            #Untuk setiap indeks spike
-            waves.append(self.data.iloc[                                     #Ambil data dari sekitar indeks spike dan simpan dalam waves
-                         (index - WAVE_SIZE):(index + WAVE_SIZE)])           #Dimulai dari (index - WAVE_SIZE) hingga (index + WAVE_SIZE)
-        if len(waves):                                                       #Jika ada gelombang yang terdeteksi
-            self.sorted_spikes = np.stack(waves)                             #Gabungkan semua gelombang menjadi array numpy dan simpan di sorted_spikes
-            return self.sorted_spikes, self.sorted_spikes.mean(axis=0)       #Kembalikan array gelombang dan nilai rata-rata gelombang
-        return np.array([]), np.array([])                                    #Jika tidak ada gelombang, kembalikan array kosong untuk keduanya
+        waves = []                                                                      #Daftar untuk menyimpan gelombang (waves) dari setiap spike
+        
+        # Loop over detected spikes
+        for index in self.spikes:
+        # Pastikan spike yang diambil berada dalam batas data
+            if (index - WAVE_SIZE) >= 0 and (index + WAVE_SIZE) <= len(self.data):
+                spike = self.data.iloc[(index - WAVE_SIZE):(index + WAVE_SIZE)]
+        
+        # Validasi bahwa ukuran spike sesuai dengan WAVE_SIZE * 2
+                if len(spike) == WAVE_SIZE * 2:                                         #Spike harus memiliki panjang yang diharapkan
+                        waves.append(spike)
+
+        # Setelah memastikan bahwa semua spike memiliki ukuran yang sama, lakukan stack
+        if len(waves):
+            self.sorted_spikes = np.stack(waves)  # Gabungkan semua spike
+            return self.sorted_spikes, self.sorted_spikes.mean(axis=0)
+        
+        return np.array([]), np.array([])                                               #Jika tidak ada gelombang, kembalikan array kosong untuk keduanya
  
-#Ekstraksi Fitur
+#Ekstraksi Fitur dengan FastICA
     def extract_features(self) -> np.array:                                  #Mendefinisikan metode extract_features yang mengembalikan numpy.array
         """                                                                  #Docstring
         Extract features using FastICA.   
@@ -143,6 +157,20 @@ class Spike:                                                #Mendefinisikan kela
         self.features = self.ica.fit_transform(scaled_spikes)                #Ekstrak fitur menggunakan FastICA dari spike yang telah diskalakan
         return self.features                                                 #Kembalikan array fitur yang diekstrak
    
+#Ekstraksi Fitur dengan PCA
+    def extract_pca_features(self) -> np.array:                              #Mendefinisikan metode extract_pca_features yang mengembalikan numpy.array
+        """                                                                  #Docstring
+        Extract features using PCA.   
+        Returns                                     
+        ---------------  
+        numpy.array                                                          #Mengembalikan array dengan fitur yang diekstrak
+        """    
+        if self.sorted_spikes is None:                                       #Jika spikes belum terurut, panggil fungsi sort untuk mengurutkan spike
+            _ = self.sort()   
+        scaled_spikes = self.scaler.fit_transform(self.sorted_spikes)        #Skalakan spike yang telah diurutkan menggunakan StandardScaler
+        self.features = self.pca.fit_transform(scaled_spikes)                #Ekstrak fitur menggunakan PCA dari spike yang telah diskalakan
+        return self.features                                                 #Kembalikan array fitur yang diekstrak
+
 #Pengelompokan Spike
     def cluster(self) -> np.array:                                           #Mendefinisikan metode cluster yang mengembalikan numpy.array
         """                                                                  #Docstring
@@ -156,3 +184,17 @@ class Spike:                                                #Mendefinisikan kela
             _ = self.extract_features()      
         self.clusters = self.kmeans.fit_predict(self.features)               #Terapkan KMeans clustering pada fitur dan simpan hasil klaster
         return self.clusters, self.features                                  #Kembalikan array klaster dan fitur yang digunakan
+    
+#Pengelompokan Spike
+    def cluster(self) -> np.array:                                           #Mendefinisikan metode cluster yang mengembalikan numpy.array
+        """                                                                  #Docstring
+        Return clusters.     
+        Returns   
+        ---------------
+        numpy.array  
+            Array with clusters.                                             #Mengembalikan array dengan fitur yang dikelompokkan
+        """  
+        if self.features is None:                                            #Jika fitur belum diekstrak, panggil fungsi extract_features untuk mengekstrak fitur
+            _ = self.extract_pca_features()      
+        self.clusters = self.kmeans.fit_predict(self.features)               #Terapkan KMeans clustering pada fitur dan simpan hasil klaster
+        return self.clusters, self.features                                  #Kembalikan array klaster dan fitur yang digunakan   

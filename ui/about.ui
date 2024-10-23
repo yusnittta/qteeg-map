@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icon/icon.svg</normaloff>:/icon/icon.svg</iconset>
+    <normaloff>:/icon/</normaloff>:/icon/</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="4" column="0">
@@ -55,7 +55,7 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG-Map <!--&lt;/span&gt;&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;--> &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; #font-size:36pt;&quot;&gt;QtEEG-MAP &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -65,21 +65,20 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>QtEEG-Map adalah perangkat lunak sederhana untuk memvisualisasikan dan menganalisis rekaman EEG dari perangkat pemantauan otak secara real-time.&lt;br&gt;&lt;br&gt;
+      <string>QtEEG-MAP adalah perangkat lunak sederhana untuk memvisualisasikan dan menganalisis rekaman EEG dari perangkat pemantauan otak secara real-time.&lt;br&gt;&lt;br&gt;
       Fitur yang tersedia: &lt;/br&gt;
       &lt;ul&gt;
       &lt;li&gt;Pra-pemrosesan menggunakan band-pass filtering&lt;/li&gt;
-      &lt;li&gt;Dekomposisi menggunakan Fast Fourier Transform&lt;/li&gt;
-      &lt;li&gt;Pemisahan sub-band frekuensi, yaitu Gamma, Alpha, Beta, Theta, dan Delta&lt;/li&gt;
-      &lt;li&gt;Pengelompokan menggunakan Algoritma KMeans&lt;/li&gt;
-      &lt;li&gt;Ploting data gulir 1D pada kanal elektroda TP9, TP10, AF7, dan AF8&lt;/li&gt;
-      &lt;li&gt;Visualisasi pada tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda&lt;/li&gt;
-      &lt;li&gt;Merekam pembacaan perangkat&lt;/li&gt;
-      &lt;li&gt;Menampilkan pembacaan perangkat secara real-time&lt;/li&gt;
-      &lt;li&gt;Deteksi, pengurutan, ekstraksi fitur, dan pengelompokan lonjakan sinyal&lt;/li&gt;
-      &lt;li&gt;Stimuli generator&lt;/li&gt;
-      &lt;li&gt;Transformasi menggunakan Fast Independent Component Analysis&lt;/li&gt;
-      &lt;li&gt;Merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT&lt;/li&gt;
+      &lt;li&gt;Transformasi menggunakan Fast Fourier Transform&lt;/li&gt;
+      &lt;li&gt;Pemisahan sub-band frekuensi Gamma, Alpha, Beta, Theta, dan Delta (dekomposisi)&lt;/li&gt;
+      &lt;li&gt;Ploting data gulir 1D pada 16 kanal elektroda (FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2, F7, F8, T3, T4, T5, T6)&lt;/li&gt;
+      &lt;li&gt;Visualisasi data gulir 1D pada tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda&lt;/li&gt;
+      &lt;li&gt;Deteksi dan pengurutan spike&lt;/li&gt;
+      &lt;li&gt;Ekstraksi fitur menggunakan FastICA dan PCA&lt;/li&gt;
+      &lt;li&gt;Klastering dengan Algoritma KMeans&lt;/li&gt;
+      &lt;li&gt;Merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, MAT, dan TXT&lt;/li&gt;
+      &lt;li&gt;Ploting peta topografi kulit kepala 2D (topoplot)&lt;/li&gt;
+      &lt;li&gt;Ploting Power Spectral Density dengan Metode Welch&lt;/li&gt;
       &lt;/ul&gt;
       </string>
      </property>

@@ -1,7 +1,17 @@
+Developed by Yusnita Putri in 2024
+Copyright © 2024, author of QtEEG-MAP
+
+Features:
+1. The application can read and process data in CSV, EDF, BDF, MAT, and TXT formats.
+2. Feature extraction using Fast Independent Component Analysis (FastICA).
+3. 1D plotting (scroll data) from 16 electrode channels (FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2, F7, F8, T3, T4, T5, T6).
+4. 2D topographical scalp map (topoplot).
+5. Power Spectral Density (PSD) plotting with Welch Method.
+
+
+
 Copyright © 2021, author of QtEEG
 All rights reserved.
-
-This is a modified version of QtEEG, named QtEEG-Map
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -24,5 +34,3 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-Modified by Yusnita Putri in 2024

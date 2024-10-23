@@ -1,24 +1,21 @@
 # QtEEG-Map
 
-Aplikasi sederhana untuk memvisualisasikan dan menganalisis rekaman EEG dari perangkat pemantauan otak.
+Aplikasi sederhana untuk memvisualisasikan dan menganalisis rekaman EEG dari perangkat pemantauan otak 16 kanal elektroda.
 
-<!--![QtEEG](assets/QtEEG.png) ![Spike detection](assets/detection.png)-->
-
-Aplikasi ini memungkinkan Anda untuk merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT dari perangkat pemantauan otak secara real-time
+Aplikasi ini memungkinkan Anda untuk merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, MAT, dan TXT dari perangkat pemantauan otak secara real-time.
 
 #### Fitur dalam aplikasi:
 1. Pra-pemrosesan menggunakan band-pass filtering
-2. Dekomposisi menggunakan Fast Fourier Transform
-3. Pemisahan sub-band frekuensi, yaitu Gamma, Alpha, Beta, Theta, dan Delta
-4. Pengelompokan menggunakan Algoritma K-Means
-5. Ploting data gulir 1D pada kanal elektroda TP9, TP10, AF7, dan AF8
-6. Visualisasi pada tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda
-7. Merekam pembacaan perangkat
-8. Menampilkan pembacaan perangkat secara real-time
-9. Deteksi, pengurutan, ekstraksi fitur, dan pengelompokan lonjakan sinyal
-10. Stimuli generator
-11. Transformasi menggunakan Fast Independent Component Analysis
-12. Merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT
+2. Transformasi menggunakan Fast Fourier Transform
+3. Pemisahan sub-band frekuensi Gamma, Alpha, Beta, Theta, dan Delta (dekomposisi)
+4. Ploting data gulir 1D pada 16 kanal elektroda (FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2, F7, F8, T3, T4, T5, T6)
+5. Visualisasi data gulir 1D pada tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda
+6. Deteksi dan pengurutan spike
+7. Ekstraksi fitur menggunakan Fast Independent Component Analysis (FastICA) dan Principal Component Analysis (PCA)
+8. Klastering dengan Algoritma KMeans
+9. Merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, MAT, dan TXT
+10. Ploting peta topografi kulit kepala 2D (topoplot)
+11. Ploting Power Spectral Density (PSD) dengan Metode Welch
 
 ### Instalasi
 Penggunaan paket [Poetry](https://python-poetry.org).<br/>
@@ -27,10 +24,6 @@ Untuk membuat ulang proyek, gunakan perintah:
 poetry install
 ```
 
-### Masalah Umum
-https://github.com/alexandrebarachant/muse-lsl/blob/master/README.md#common-issues
-
-
 ##### Menggunakan File QRC
 Untuk menggunakan file qrc dalam aplikasi perlu dikompilasi ke dalam Python terlebih dahulu.
 ```bash
@@ -38,10 +31,8 @@ pyrcc5 resources.qrc -o resources.py
 ```
 
 ### Penghargaan
-- Menghubungkan, merekam, dan streaming data dari Muse S dilakukan menggunakan
-https://github.com/alexandrebarachant/muse-lsl
-- Analisis lonjakan sinyal menggunakan https://github.com/multichannelsystems/McsPyDataTools/blob/master/McsPyDataTools/docs/McsPy-Tutorial_DataAnalysis.ipynb
-- Sumper inspirasi pengembangan perangkat lunak pengolahan sinyal EEG https://github.com/bartlomiej-chybowski/qteeg?tab=readme-ov-file
+- Sumber proyek open source untuk melakukan perubahan, eksperimen, dan pengembangan: https://github.com/bartlomiej-chybowski/qteeg
+- Tim penyedia dataset (direkam menggunakan perangkat Contect KT88)
 
 ### Kontak
-Jika ada masalah, harap laporkan masalah tersebut 
+Jika ada masalah atau izin penggunaan dataset dalam assets kami di luar fork dalam Qt-EEGMap, harap hubungi kami. Jika ada masalah, mohon untuk melaporkannya.

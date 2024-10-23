@@ -42,6 +42,7 @@ class FrequencyFilter:                      #Mendefinisikan kelas FrequencyFilte
         signal[(fft_sample >= self.low)] = 0    #Menerapkan filter low-pass dengan menetapkan nilai sinyal ke 0 jika frekuensi lebih tinggi atau sama dengan batas frekuensi `low`
         return signal                           #Mengembalikan sinyal yang telah difilter
 
+#Implementasi High-pass Filtering
     def high_pass(self, signal: np.array, fft_sample: np.array) -> np.array: #Fungsi untuk menerapkan filter high-pass
         """                         #Docstring
         High-pass Filter.

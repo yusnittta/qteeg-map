@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icon/icon.svg</normaloff>:/icon/icon.svg</iconset>
+    <normaloff>:/icon/</normaloff>:/icon/</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
@@ -28,7 +28,7 @@
       </font>
      </property>
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG-Map &lt;/span&gt;<!--&lt;img style=&quot;vertical-align:middle;height:36px;&quot; src=&quot;:/icon/icon.svg&quot;/&gt;--> &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:36pt;&quot;&gt;QtEEG-Map &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -38,7 +38,14 @@
    <item row="2" column="0">
     <widget class="QLabel" name="label_4">
      <property name="text">
-      <string>Selamat datang di aplikasi QtEEG-Map. Aplikasi ini dirancang untuk memungkinkan Anda merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, dan MAT dari perangkat pemantauan otak secara real-time. Kami menyediakan berbagai fitur untuk membantu Anda dalam menganalisis data EEG. Anda dapat melakukan pra-pemrosesan data menggunakan band-pass filtering dan dekomposisi dengan Fast Fourier Transform. Aplikasi ini juga memungkinkan pemisahan sub-band frekuensi seperti Gamma, Alpha, Beta, Theta, dan Delta, serta pengelompokan data menggunakan Algoritma K-Means. Fitur plotting memungkinkan Anda untuk melihat data gulir satu dimensi pada kanal elektroda TP9, TP10, AF7, dan AF8, serta visualisasi dalam tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda. Selain itu, Anda dapat merekam dan menampilkan pembacaan perangkat secara real-time, melakukan deteksi, pengurutan, ekstraksi fitur, dan pengelompokan lonjakan sinyal. Aplikasi ini juga dilengkapi dengan stimuli generator dan transformasi menggunakan Fast Independent Component Analysis. Jika Anda memerlukan bantuan lebih lanjut atau mengalami masalah, jangan ragu untuk menghubungi tim kami. Kami berharap Anda mendapatkan pengalaman yang bermanfaat dengan aplikasi ini! </string>
+      <string>
+      Selamat datang di aplikasi QtEEG-Map. 
+      Aplikasi ini dirancang untuk memungkinkan Anda merekam dan memvisualisasikan data raw EEG berformat CSV, EDF, BDF, MAT, dan TXT dari perangkat pemantauan otak 16 kanal elektroda secara real-time. 
+      Kami menyediakan berbagai fitur untuk membantu Anda dalam menganalisis data EEG. 
+      Aplikasi ini memungkinkan pra-pemrosesan data menggunakan band-pass filtering, transformasi menggunakan Fast Fourier Transform, dan pemisahan sub-band frekuensi seperti Gamma, Alpha, Beta, Theta, dan Delta.
+      Fitur plotting memungkinkan Anda untuk melihat visualisasi data gulir satu dimensi pada 16 kanal elektroda (FP1, FP2, F3, F4, C3, C4, P3, P4, O1, O2, F7, F8, T3, T4, T5, T6) serta visualisasi dalam tegangan, domain waktu, frekuensi tunggal, dan frekuensi ganda. Selain itu, Anda dapat melakukan deteksi dan pengurutan spike, ekstraksi fitur menggunakan Fast Independent Component Analysis (FastICA) dan Prinsipal Component Analysis (PCA), serta klastering dengan algoritma KMeans. 
+      Aplikasi ini juga dilengkapi dengan fitur ploting peta topografi kulit kepala (topoplot) dua dimensi dan ploting Power Spectral Density (PSD) dengan Metode Welch. 
+      Jika Anda memerlukan bantuan lebih lanjut atau mengalami masalah, jangan ragu untuk menghubungi tim kami. Kami berharap Anda mendapatkan pengalaman yang bermanfaat dengan aplikasi ini! </string>
      </property>
      <property name="textFormat">
       <enum>Qt::RichText</enum>

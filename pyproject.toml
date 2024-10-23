@@ -1,8 +1,8 @@
 [tool.poetry]
-name = "QtEEG"
+name = "QtEEG-MAP"
 version = "0.0.1"
-description = "Visualise and manipulate EEG MuseS output"
-authors = ["enzo-bc <b.chybowski@gmail.com>"]
+description = "EEG Mapping and Analysis Platform"
+authors = ["yusnitaputri"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.10"

@@ -23,8 +23,8 @@ class ViewBoxCustom(ViewBox):                   #Mendefinisikan subclass ViewBox
                          name=name,                         #Meneruskan argumen name ke konstruktor superclass
                          invertX=invertX)                   #Meneruskan argumen invertX ke konstruktor superclass
           
-    def wheelEvent(self, ev: QEvent, axis: int = None) -> None:                         #Mendefinisikan metode wheelEvent untuk menangani peristiwa roda mouse
-        """                                                                             #Docstring
+    def wheelEvent(self, ev: QEvent, axis: int = None) -> None:                        #Mendefinisikan metode wheelEvent untuk menangani peristiwa roda mouse
+        """                                                                            #Docstring
         Adjust wheel event.  
         Y wheel event (vertical zoom) should only work over Y-axis.  
         X wheel event (horizontal zoom) should work on both axis and chart area.   

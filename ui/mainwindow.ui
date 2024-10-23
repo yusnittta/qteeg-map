@@ -11,11 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>QtEEG-Map</string>
+   <string>QtEEG-MAP</string>
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icon/icon.svg</normaloff>:/icon/icon.svg</iconset>
+    <normaloff>:/icon.png</normaloff>
+    </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="minimumSize">
@@ -89,33 +90,117 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_3">
           <item>
-           <widget class="QCheckBox" name="checkboxTP9">
+           <widget class="QCheckBox" name="checkboxFP1">
             <property name="styleSheet">
              <string notr="true"/>
             </property>
             <property name="text">
-             <string>TP9</string>
+             <string>FP1</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkboxAF7">
+           <widget class="QCheckBox" name="checkboxFP2">
             <property name="text">
-             <string>AF7</string>
+             <string>FP2</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkboxAF8">
+           <widget class="QCheckBox" name="checkboxF3">
             <property name="text">
-             <string>AF8</string>
+             <string>F3</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkboxTP10">
+           <widget class="QCheckBox" name="checkboxF4">
             <property name="text">
-             <string>TP10</string>
+             <string>F4</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxC3">
+            <property name="text">
+             <string>C3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxC4">
+            <property name="text">
+             <string>C4</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxP3">
+            <property name="text">
+             <string>P3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxP4">
+            <property name="text">
+             <string>P4</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxO1">
+            <property name="text">
+             <string>O1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxO2">
+            <property name="text">
+             <string>O2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxF7">
+            <property name="text">
+             <string>F7</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxF8">
+            <property name="text">
+             <string>F8</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxT3">
+            <property name="text">
+             <string>T3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxT4">
+            <property name="text">
+             <string>T4</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxT5">
+            <property name="text">
+             <string>T5</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkboxT6">
+            <property name="text">
+             <string>T6</string>
             </property>
            </widget>
           </item>
@@ -206,18 +291,11 @@
     <property name="title">
      <string>&amp;Dokumen</string>
     </property>
-    <widget class="QMenu" name="menuConnect_do_device">
+    <widget class="QMenu" name="menuConnect_do_device">         
      <property name="title">
-      <string>&amp;Perangkat</string>
+    <string>&amp;Perangkat</string>
      </property>
-     <addaction name="actionStream"/>
-     <addaction name="actionDisconnect"/>
-     <addaction name="separator"/>
-     <addaction name="actionRecord"/>
-     <addaction name="actionStop"/>
-     <addaction name="actionView"/>
     </widget>
-    <addaction name="menuConnect_do_device"/>
     <addaction name="actionOpen"/>
     <addaction name="separator"/>
     <addaction name="actionSettings"/>
@@ -236,16 +314,19 @@
     <property name="title">
      <string>Plot</string>
     </property>
+    
     <addaction name="actionSpike_sorting"/>
     <addaction name="actionSpike_detecting"/>
-    <addaction name="actionFeature_extraction"/>
-    <addaction name="actionClustering"/>
+    <addaction name="actionTopoplot"/>
+    <addaction name="actionSpectrum"/>
+    <addaction name="actionClustering"/>                  
    </widget>
    <widget class="QMenu" name="menuTools">
     <property name="title">
-     <string>Alat</string>
+     <string>Ekstraksi Fitur</string>
     </property>
-    <addaction name="actionStimuli"/>
+    <addaction name="actionFeature_extraction"/>
+    <addaction name="actionPCA_extraction"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuTools"/>
@@ -276,24 +357,18 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionOpen"/>
-   <addaction name="actionStream"/>
-   <addaction name="actionDisconnect"/>
-   <addaction name="separator"/>
-   <addaction name="actionRecord"/>
-   <addaction name="actionStop"/>
-   <addaction name="actionView"/>
-   <addaction name="separator"/>
-   <addaction name="actionStimuli"/>
-   <addaction name="separator"/>
    <addaction name="actionSpike_sorting"/>
    <addaction name="actionSpike_detecting"/>
    <addaction name="actionFeature_extraction"/>
-   <addaction name="actionClustering"/>
+   <addaction name="actionPCA_extraction"/>
+   <addaction name="actionTopoplot"/>
+   <addaction name="actionSpectrum"/>
+   <addaction name="actionClustering"/>                 
   </widget>
   <action name="actionOpen">
    <property name="icon">
     <iconset>
-     <normalon>:/icon2/open2.svg</normalon>
+    <normalon>:/icon2/open2.svg</normalon>
     </iconset>
    </property>
    <property name="text">
@@ -320,71 +395,6 @@
     <string>Bantuan</string>
    </property>
   </action>
-  <action name="actionStream">
-   <property name="enabled">
-    <bool>true</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/connect2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Hubungkan dan Si&amp;arkan</string>
-   </property>
-  </action>
-  <action name="actionDisconnect">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/disconnect2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>&amp;Putuskan</string>
-   </property>
-  </action>
-  <action name="actionRecord">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/record2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Rekam</string>
-   </property>
-  </action>
-  <action name="actionStop">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/stop2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Berhenti</string>
-   </property>
-  </action>
-  <action name="actionView">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/view2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Lihat</string>
-   </property>
-  </action>
   <action name="actionSettings">
    <property name="enabled">
     <bool>true</bool>
@@ -393,30 +403,17 @@
     <string>Pengaturan</string>
    </property>
   </action>
-  <action name="actionStimuli">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normalon>:/icon2/stimuli2.svg</normalon>
-    </iconset>
-   </property>
-   <property name="text">
-    <string>Stimuli</string>
-   </property>
-  </action>
   <action name="actionSpike_sorting">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="icon">
     <iconset>
-     <normalon>:/icon2/sorting2.svg</normalon>
+     <normalon>:/icon2/</normalon>
     </iconset>
    </property>
    <property name="text">
-    <string>Pengurutan Lonjakan Sinyal</string>
+    <string>Pengurutan Spike</string>
    </property>
   </action>
   <action name="actionSpike_detecting">
@@ -425,11 +422,11 @@
    </property>
    <property name="icon">
     <iconset>
-     <normalon>:/icon2/detection2.svg</normalon>
+     <normalon>:/icon2/</normalon>
     </iconset>
    </property>
    <property name="text">
-    <string>Deteksi Lonjakan Sinyal</string>
+    <string>Deteksi Spike</string>
    </property>
   </action>
   <action name="actionFeature_extraction">
@@ -438,24 +435,63 @@
    </property>
    <property name="icon">
     <iconset>
-     <normalon>:/icon2/feature_selection2.svg</normalon>
+     <normalon>:/icon2/</normalon>
     </iconset>
    </property>
    <property name="text">
-    <string>Ekstraksi Fitur</string>
+    <string>FastICA</string>
    </property>
   </action>
+  <action name="actionPCA_extraction">
+   <property name="enabled">
+    <bool>false</bool>  
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon2/</normalon>  
+    </iconset>
+   </property>
+   <property name="text">
+    <string>PCA</string>  
+   </property>
+  </action>
+  <action name="actionTopoplot">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon2/</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Scalp Map</string>
+   </property>
+   </action>
+  <action name="actionSpectrum">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normalon>:/icon2/</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Spektrum</string>
+   </property>
+</action>
   <action name="actionClustering">
    <property name="enabled">
     <bool>false</bool>
    </property>
    <property name="icon">
     <iconset>
-     <normalon>:/icon2/clustering2.svg</normalon>
+     <normalon>:/icon2/</normalon>
     </iconset>
    </property>
    <property name="text">
-    <string>Pengelompokan</string>
+    <string>Klastering</string>
    </property>
   </action>
  </widget>
