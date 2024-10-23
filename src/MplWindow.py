@@ -230,11 +230,11 @@ class MplWindow(QtWidgets.QMainWindow):             #Mendefinisikan kelas MplWin
         self.canvas.figure.clear()
         #Mendefinisikan frekuensi untuk diplot
         freqs_to_plot = {
-            'Delta': (0.5, 4),
-            'Theta': (4, 8),
-            'Alpha': (8, 12),
-            'Beta': (12, 30),
-            'Gamma': (35, 70),
+            'Delta (0.5-4 Hz)': (0.5, 4),
+            'Theta (4-8 Hz)': (4, 8),
+            'Alpha (8-12 Hz)': (8, 12),
+            'Beta (12-30 Hz)': (12, 30),
+            'Gamma (35-70 Hz)': (35, 70),
             'Total': (8, 70)
         }
         #Jumlah elektroda/saluran
@@ -294,7 +294,7 @@ class MplWindow(QtWidgets.QMainWindow):             #Mendefinisikan kelas MplWin
             for j, (x, y) in enumerate(electrode_pos):
                 self.canvas.axes[row, col].text(x, y, f"{self.values.columns[j]}", color="white", fontsize=12, ha='center', va='center')
             #Menetapkan judul untuk setiap plot
-            self.canvas.axes[row, col].set_title(f'{freq} Hz')
+            self.canvas.axes[row, col].set_title(f'{freq}')
             #Menetapkan batas yang sama untuk semua sumbu untuk memastikan keseragaman
             self.canvas.axes[row, col].set_xlim(-1.2, 1.2)
             self.canvas.axes[row, col].set_ylim(-1.2, 1.2)
