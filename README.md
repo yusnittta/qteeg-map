@@ -35,4 +35,4 @@ pyrcc5 resources.qrc -o resources.py
 - Tim penyedia dataset (direkam menggunakan perangkat Contec KT88)
 
 ### Kontak
-Jika ada masalah atau izin penggunaan dataset dalam assets kami di luar fork dalam Qt-EEGMap, harap hubungi kami. Jika ada masalah, mohon untuk melaporkannya.
+Jika ada masalah atau izin penggunaan dataset dalam assets kami di luar fork dalam QtEEG-Map, harap hubungi kami. Jika ada masalah, mohon untuk melaporkannya.
