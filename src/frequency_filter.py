@@ -60,26 +60,26 @@ class FrequencyFilter:                      #Mendefinisikan kelas FrequencyFilte
 
 #Pemisahan Sub-band Frekuensi
 
-#Frekuensi Gamma (35-70 Hz)
+#Frekuensi Gamma (20-40 Hz)
 class GammaFilter(FrequencyFilter):       #Mendefinisikan kelas GammaFilter yang mewarisi dari FrequencyFilter
     def __init__(self, current: int):     #Konstruktor untuk kelas GammaFilter yang menerima parameter integer 'current'
         super().__init__(current)         #Memanggil konstruktor kelas induk (FrequencyFilter) dengan parameter 'current'
-        self.low = 35                     #Mengatur atribut 'low' dengan nilai 35, menentukan batas bawah filter
-        self.high = 70                    #Mengatur atribut 'high' dengan nilai 70, menentukan batas atas filter
+        self.low = 20                     #Mengatur atribut 'low' dengan nilai 20, menentukan batas bawah filter
+        self.high = 40                    #Mengatur atribut 'high' dengan nilai 40, menentukan batas atas filter
 
-#Frekuensi Beta (12-35 Hz)
+#Frekuensi Beta (14-30 Hz)
 class BetaFilter(FrequencyFilter):        #Mendefinisikan kelas BetaFilter yang mewarisi dari FrequencyFilter
     def __init__(self, current: int):     #Konstruktor untuk kelas BetaFilter yang menerima parameter integer 'current'
         super().__init__(current)         #Memanggil konstruktor kelas induk (FrequencyFilter) dengan parameter 'current'
-        self.low = 12                     #Mengatur atribut 'low' dengan nilai 12, menentukan batas bawah filter
-        self.high = 35                    #Mengatur atribut 'high' dengan nilai 35, menentukan batas atas filter
+        self.low = 14                     #Mengatur atribut 'low' dengan nilai 14, menentukan batas bawah filter
+        self.high = 30                    #Mengatur atribut 'high' dengan nilai 30, menentukan batas atas filter
 
-#Frekuensi Alpha (8-12 Hz)
+#Frekuensi Alpha (8-13 Hz)
 class AlphaFilter(FrequencyFilter):       #Mendefinisikan kelas AlphaFilter yang mewarisi dari FrequencyFilter
     def __init__(self, current: int):     #Konstruktor untuk kelas AlphaFilter yang menerima parameter integer 'current'
         super().__init__(current)         #Memanggil konstruktor kelas induk (FrequencyFilter) dengan parameter 'current'
         self.low = 8                      #Mengatur atribut 'low' dengan nilai 8, menentukan batas bawah filter
-        self.high = 12                    #Mengatur atribut 'high' dengan nilai 12, menentukan batas atas filter
+        self.high = 13                    #Mengatur atribut 'high' dengan nilai 13, menentukan batas atas filter
 
 #Frekuensi Tetha (4-8 Hz)
 class ThetaFilter(FrequencyFilter):       #Mendefinisikan kelas TethaFilter yang mewarisi dari FrequencyFilter
@@ -88,11 +88,11 @@ class ThetaFilter(FrequencyFilter):       #Mendefinisikan kelas TethaFilter yang
         self.low = 4                      #Mengatur atribut 'low' dengan nilai 4, menentukan batas bawah filter
         self.high = 8                     #Mengatur atribut 'high' dengan nilai 8, menentukan batas atas filter
 
-#Frekuensi Delta (0.5-4 Hz)
+#Frekuensi Delta (0-4 Hz)
 class DeltaFilter(FrequencyFilter):       #Mendefinisikan kelas TethaFilter yang mewarisi dari FrequencyFilter
     def __init__(self, current: int):     #Konstruktor untuk kelas TethaFilter yang menerima parameter integer 'current'
         super().__init__(current)         #Memanggil konstruktor kelas induk (FrequencyFilter) dengan parameter 'current'
-        self.low = 0.5                    #Mengatur atribut 'low' dengan nilai 0.5, menentukan batas bawah filter
+        self.low = 0                      #Mengatur atribut 'low' dengan nilai 0, menentukan batas bawah filter
         self.high = 4                     #Mengatur atribut 'high' dengan nilai 4, menentukan batas atas filter
 
 #Pembuat Filter

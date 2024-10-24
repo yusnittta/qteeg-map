@@ -230,12 +230,12 @@ class MplWindow(QtWidgets.QMainWindow):             #Mendefinisikan kelas MplWin
         self.canvas.figure.clear()
         #Mendefinisikan frekuensi untuk diplot
         freqs_to_plot = {
-            'Delta (0.5-4 Hz)': (0.5, 4),
+            'Delta (0-4 Hz)': (0, 4),
             'Theta (4-8 Hz)': (4, 8),
-            'Alpha (8-12 Hz)': (8, 12),
-            'Beta (12-30 Hz)': (12, 30),
-            'Gamma (35-70 Hz)': (35, 70),
-            'Total': (8, 70)
+            'Alpha (8-13 Hz)': (8, 13),
+            'Beta (14-30 Hz)': (14, 30),
+            'Gamma (20-40 Hz)': (20, 40),
+            'Total': (0, 40)
         }
         #Jumlah elektroda/saluran
         num_channels = len(self.values.columns)
