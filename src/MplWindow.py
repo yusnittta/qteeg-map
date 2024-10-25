@@ -187,7 +187,7 @@ class MplWindow(QtWidgets.QMainWindow):             #Mendefinisikan kelas MplWin
                 self.canvas.axes[axis_row, axis_col].scatter(                       #Menggambar data cluster pada subplot yang sesuai
                     features[cluster, 0], features[cluster, 1], s=1.0, c=c)         #Menggunakan warna `c` dan ukuran titik 1.0 untuk scatter plot
             self.canvas.axes[axis_row, axis_col].set_title(                         #Mengatur judul subplot dengan warna sesuai dengan kolom
-                "Clusters", color=self.colours[column])   
+                "Klaster", color=self.colours[column])   
         for row, col, col_name in self.coordinates:                                 #Iterasi melalui setiap koordinat yang didefinisikan dalam `self.coordinates`
             _plot(row, col, col_name, self.values.loc[:, col_name])                 #Memanggil fungsi `_plot` untuk menggambar cluster pada subplot yang sesuai dengan nama kolom
         self.canvas.figure.subplots_adjust(wspace=0.2, hspace=0.2)                  #Menyesuaikan jarak antara subplot pada figure dengan ruang horizontal (`wspace`) dan vertikal (`hspace`) yang ditentukan

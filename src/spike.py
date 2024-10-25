@@ -171,7 +171,7 @@ class Spike:                                                #Mendefinisikan kela
         self.features = self.pca.fit_transform(scaled_spikes)                #Ekstrak fitur menggunakan PCA dari spike yang telah diskalakan
         return self.features                                                 #Kembalikan array fitur yang diekstrak
 
-#Pengelompokan Spike
+#Pengelompokan Spike untuk FastICA
     def cluster(self) -> np.array:                                           #Mendefinisikan metode cluster yang mengembalikan numpy.array
         """                                                                  #Docstring
         Return clusters.     
@@ -185,7 +185,7 @@ class Spike:                                                #Mendefinisikan kela
         self.clusters = self.kmeans.fit_predict(self.features)               #Terapkan KMeans clustering pada fitur dan simpan hasil klaster
         return self.clusters, self.features                                  #Kembalikan array klaster dan fitur yang digunakan
     
-#Pengelompokan Spike
+#Pengelompokan Spike untuk PCA
     def cluster(self) -> np.array:                                           #Mendefinisikan metode cluster yang mengembalikan numpy.array
         """                                                                  #Docstring
         Return clusters.     
